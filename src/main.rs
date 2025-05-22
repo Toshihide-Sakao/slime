@@ -1,3 +1,6 @@
+// use actix_web::{App, Error, HttpResponse, HttpServer, web};
+
+
 #[cfg(feature = "ssr")]
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -8,6 +11,20 @@ async fn main() -> std::io::Result<()> {
     use leptos_meta::MetaTags;
     use leptos_actix::{generate_route_list, LeptosRoutes};
     use slime::app::*;
+
+    // use confik::{Configuration as _, EnvSource};
+    // use deadpool_postgres::{Client, Pool};
+    // use dotenvy::dotenv;
+    // use tokio_postgres::NoTls;
+
+    // use crate::config::ExampleConfig;
+
+    // mod config;
+    // mod db;
+    // mod errors;
+    // mod models;
+
+    // use self::{errors::MyError, models::User};
 
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
