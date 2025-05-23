@@ -16,13 +16,18 @@ CREATE TABLE slime_db.companies (
 	org_id	  	BIGINT NOT NULL,
 	name        VARCHAR(200) NOT NULL,
 	website     VARCHAR(200) NOT NULL,
-	phone       VARCHAR(50) NOT NULL,
-	email       VARCHAR(200) NOT NULL,
-	address     VARCHAR(200) NOT NULL,
-	city        VARCHAR(200) NOT NULL,
-	state       VARCHAR(50) NOT NULL,
-	zip         VARCHAR(20) NOT NULL,
+	address     VARCHAR(200),
+	city        VARCHAR(200),
+	state       VARCHAR(50),
+	zip         VARCHAR(20),
 	country     VARCHAR(50) NOT NULL
+)
+
+CREATE TABLE slime_db.company_people (
+	company_id  BIGINT NOT NULL,
+	person_id   BIGINT NOT NULL,
+
+	PRIMARY KEY (company_id, person_id)
 )
 
 CREATE TABLE slime_db.opportunities (
@@ -32,7 +37,6 @@ CREATE TABLE slime_db.opportunities (
 	company_id  BIGINT NOT NULL,
 	created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
 );
 
 CREATE TABLE slime_db.commitee (
