@@ -1,4 +1,7 @@
 pub mod app;
+pub(crate) mod database;
+pub(crate) mod models;
+pub(crate) mod routes;
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]
