@@ -1,10 +1,12 @@
+use sqlx::{self, FromRow};
 use serde::{Deserialize, Serialize};
 
-// #[derive(Deserialize, PostgresMapper, Serialize)]
-// #[pg_mapper(table = "users")] // singular 'user' is a keyword..
+#[derive(Serialize, FromRow)]
 pub struct User {
+    pub id: i64,
+    pub kth_id: String,
     pub email: String,
     pub first_name: String,
     pub last_name: String,
-    pub username: String,
+    pub psw: String,
 }

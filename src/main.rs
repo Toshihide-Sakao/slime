@@ -1,7 +1,11 @@
 
+use dotenv::dotenv;
+use sqlx::postgres::PgPoolOptions;
+
 
 #[cfg(feature = "ssr")]
 #[actix_web::main]
+#[tokio::main]
 async fn main() -> std::io::Result<()> {
     use actix_files::Files;
     use actix_web::*;
@@ -11,22 +15,16 @@ async fn main() -> std::io::Result<()> {
     use leptos_actix::{generate_route_list, LeptosRoutes};
     use slime::app::*;
 
-    // use confik::{Configuration as _, EnvSource};
-    // use deadpool_postgres::{Client, Pool};
-    // use dotenvy::dotenv;
-    // use tokio_postgres::NoTls;
-
-    // use crate::config::ExampleConfig;
-
-    // mod config;
-    // mod db;
-    // mod errors;
-    // mod models;
-
-    // use self::{errors::MyError, models::User};
-
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
+
+    dotenv().ok();
+    let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let pool = PgPoolOptions::new()
+        .max_connections(5)
+        .connect(&database_url)
+        .await
+        .expect("Error building a connection pool");
 
     HttpServer::new(move || {
         // Generate the list of routes in your Leptos App
@@ -63,7 +61,7 @@ async fn main() -> std::io::Result<()> {
                     }
                 }
             })
-            .app_data(web::Data::new(leptos_options.to_owned()))
+            .app_data(Data::new(AppState {db: pool.clone()}))
         //.wrap(middleware::Compress::default())
     })
     .bind(&addr)?

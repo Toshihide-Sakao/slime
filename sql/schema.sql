@@ -2,12 +2,12 @@
 
 CREATE TABLE users (
 	id  		BIGSERIAL PRIMARY KEY,
-	kth_id    VARCHAR(50) UNIQUE NOT NULL,
+	kth_id      VARCHAR(50) UNIQUE NOT NULL,
 	email       VARCHAR(200) NOT NULL,
 	first_name  VARCHAR(200) NOT NULL,
 	last_name   VARCHAR(200) NOT NULL,
-	password    VARCHAR(200) NOT NULL,
-	UNIQUE (kth_id)
+	psw    		VARCHAR(200) NOT NULL,
+	-- UNIQUE (kth_id)
 );
 
 CREATE TABLE companies (
