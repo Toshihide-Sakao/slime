@@ -1,8 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, Stylesheet, Title};
 use leptos_router::{
-    components::{Route, Router, Routes},
-    StaticSegment, WildcardSegment,
+    components::{Route, Router, Routes}, hooks::use_query_map, StaticSegment, WildcardSegment
 };
 
 #[component]
@@ -37,9 +36,23 @@ fn HomePage() -> impl IntoView {
     let count = RwSignal::new(0);
     let on_click = move |_| *count.write() += 1;
 
+    // let query = use_query_map();
+    // // search stored as ?q=
+    // let search = move || query.read().get("q").unwrap_or_default();
+    // // a resource driven by the search string
+    // let search_results = Resource::new(search, |_| get_users());
+
     view! {
-        <h1>"Welcome to Br!"</h1>
+        <h1>"Welcome to Bru!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
+        // <Form method="GET" action="">
+        //     <input type="search" name="q" value=search/>
+        //     <input type="submit"/>
+        // </Form>
+        // <Transition fallback=move || ()>
+        //     /* render search results */
+        //     {todo!()}
+        // </Transition>
     }
 }
 

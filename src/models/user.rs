@@ -1,9 +1,12 @@
-use sqlx::{self, FromRow};
-use serde::{Deserialize, Serialize};
+#![cfg(feature = "ssr")]
 
-#[derive(Serialize, FromRow)]
+// use sqlx::{self, FromRow};
+use serde::{Deserialize, Serialize};
+use tokio_pg_mapper_derive::PostgresMapper;
+
+#[derive(Deserialize, PostgresMapper, Serialize, Debug)]
+#[pg_mapper(table = "users")]
 pub struct User {
-    pub id: i64,
     pub kth_id: String,
     pub email: String,
     pub first_name: String,
