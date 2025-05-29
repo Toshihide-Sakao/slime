@@ -14,3 +14,8 @@ Cargo.lock
 *.pdb
 
 /.env
+
+# node things for tailwindcss
+node_modules/
+package-lock.json
+style/output/output.css

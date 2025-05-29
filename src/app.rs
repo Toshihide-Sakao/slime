@@ -3,6 +3,7 @@ use leptos_meta::{provide_meta_context, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes}, hooks::use_query_map, StaticSegment, WildcardSegment
 };
+use crate::routes::home::HomePage;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -13,9 +14,9 @@ pub fn App() -> impl IntoView {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/slime.css"/>
-
+        <link data-trunk rel="tailwind-css" href="/style/input.css" />
         // sets the document title
-        <Title text="Welcome to Bruh"/>
+        <Title text="SLIME"/>
 
         // content for this welcome page
         <Router>
@@ -30,31 +31,31 @@ pub fn App() -> impl IntoView {
 }
 
 /// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
+// #[component]
+// fn HomePage() -> impl IntoView {
+//     // Creates a reactive value to update the button
+//     let count = RwSignal::new(0);
+//     let on_click = move |_| *count.write() += 1;
 
-    // let query = use_query_map();
-    // // search stored as ?q=
-    // let search = move || query.read().get("q").unwrap_or_default();
-    // // a resource driven by the search string
-    // let search_results = Resource::new(search, |_| get_users());
+//     // let query = use_query_map();
+//     // // search stored as ?q=
+//     // let search = move || query.read().get("q").unwrap_or_default();
+//     // // a resource driven by the search string
+//     // let search_results = Resource::new(search, |_| get_users());
 
-    view! {
-        <h1>"Welcome to Bru!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
-        // <Form method="GET" action="">
-        //     <input type="search" name="q" value=search/>
-        //     <input type="submit"/>
-        // </Form>
-        // <Transition fallback=move || ()>
-        //     /* render search results */
-        //     {todo!()}
-        // </Transition>
-    }
-}
+//     view! {
+//         <h1>"Welcome to Bru!"</h1>
+//         <button class="bg-red-500 rounded text-white px-2 py-2" on:click=on_click>"Click Me: " {count}</button>
+//         // <Form method="GET" action="">
+//         //     <input type="search" name="q" value=search/>
+//         //     <input type="submit"/>
+//         // </Form>
+//         // <Transition fallback=move || ()>
+//         //     /* render search results */
+//         //     {todo!()}
+//         // </Transition>
+//     }
+// }
 
 /// 404 - Not Found
 #[component]

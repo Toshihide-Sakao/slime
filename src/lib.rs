@@ -4,6 +4,7 @@ pub(crate) mod models;
 pub(crate) mod routes;
 pub(crate) mod config;
 pub(crate) mod errors;
+pub(crate) mod components;
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]

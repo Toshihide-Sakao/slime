@@ -59,3 +59,14 @@ PG__POOL_MAX_SIZE=16
 ```shell
 echo '{"kth_id": "wtf", "email": "wtf@kth.se", "first_name": "brirst", "last_name": "brast", "psw": "password"}' | http -f --json --print h POST http://127.0.0.1:3000/users
 ```
+
+## To run it
+```shell
+cargo leptos watch
+```
+and 
+```shell
+npm run watch
+```
+
+in 2 differetn treminals
