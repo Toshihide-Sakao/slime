@@ -12,11 +12,9 @@ CREATE TABLE slime.users (
 );
 
 CREATE TABLE slime.companies (
-	org_id	  	BIGINT PRIMARY KEY,
-	name        VARCHAR(200) NOT NULL,
-	country	 	VARCHAR(200) NOT NULL,
-	address     VARCHAR(200),
-	invoice_adress VARCHAR(200)
+	org_id	  		BIGINT PRIMARY KEY,
+	name        	VARCHAR(200) NOT NULL,
+	country	 		VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE slime.people (
@@ -27,7 +25,7 @@ CREATE TABLE slime.people (
 	email       VARCHAR(200),
 	phone       VARCHAR(50),
 	linkedin    VARCHAR(200),
-	notes	    TEXT,
+	notes		TEXT,
 	created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -47,6 +45,7 @@ CREATE TABLE slime.commitee (
 CREATE TABLE slime.opportunities (
 	id  		BIGSERIAL PRIMARY KEY,
 	name        VARCHAR(200) NOT NULL,
+	status	  	VARCHAR(50) NOT NULL,
 	created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -65,7 +64,7 @@ CREATE TABLE slime.invoices (
 
 CREATE TABLE slime.products (
 	id  		BIGSERIAL PRIMARY KEY,
-	commitee_id   BIGINT NOT NULL REFERENCES slime.commitee(id) ON DELETE CASCADE,
+	commitee_id BIGINT NOT NULL REFERENCES slime.commitee(id) ON DELETE CASCADE,
 	name        VARCHAR(200) NOT NULL,
 	description VARCHAR(200) NOT NULL,
 	price       DECIMAL(10, 2) NOT NULL,
@@ -82,35 +81,35 @@ CREATE TABLE slime.notes (
 );
 
 
-CREATE TABLE slime.opportunity_people (
+CREATE TABLE slime.opportunities_people (
 	opportunity_id BIGINT NOT NULL REFERENCES slime.opportunities(id) ON DELETE CASCADE,
 	person_id      BIGINT NOT NULL REFERENCES slime.people(id) ON DELETE CASCADE,
 
 	PRIMARY KEY (opportunity_id, person_id)
 );
 
-CREATE TABLE slime.opportunity_products (
+CREATE TABLE slime.opportunities_products (
 	opportunity_id BIGINT NOT NULL REFERENCES slime.opportunities(id) ON DELETE CASCADE,
 	product_id     BIGINT NOT NULL REFERENCES slime.products(id) ON DELETE CASCADE,
 
 	PRIMARY KEY (opportunity_id, product_id)
 );
 
-CREATE TABLE slime.opportunity_invoices (
+CREATE TABLE slime.opportunities_invoices (
 	opportunity_id BIGINT NOT NULL REFERENCES slime.opportunities(id) ON DELETE CASCADE,
 	invoice_id     BIGINT NOT NULL REFERENCES slime.invoices(id) ON DELETE CASCADE,
 
 	PRIMARY KEY (opportunity_id, invoice_id)
 );
 
-CREATE TABLE slime.opportunity_committees (
+CREATE TABLE slime.opportunities_committees (
 	opportunity_id BIGINT NOT NULL REFERENCES slime.opportunities(id) ON DELETE CASCADE,
 	committee_id   BIGINT NOT NULL REFERENCES slime.commitee(id) ON DELETE CASCADE,
 
 	PRIMARY KEY (opportunity_id, committee_id)
 );
 
-CREATE TABLE slime.opportunity_user (
+CREATE TABLE slime.opportunities_user (
 	opportunity_id 	BIGINT NOT NULL REFERENCES slime.opportunities(id) ON DELETE CASCADE,
 	u_id		    BIGINT NOT NULL REFERENCES slime.users(id) ON DELETE CASCADE,
 
